@@ -1,0 +1,19 @@
+CREATE PROCEDURE `penilaian`(IN `nim` CHAR(20), OUT `nilai` DECIMAL(4,2))
+
+BEGIN
+
+	DECLARE jml_nilai DECIMAL(4,2) DEFAULT 0;
+	SELECT semester_1 INTO jml_nilai FROM nilai_mahasiswa WHERE nilai_mahasiswa.nim=nim;
+	set nilai = jml_nilai;
+    
+    IF nilai < 4.00 THEN
+                SELECT 'Mantab, pertahankan!';
+        ELSEIF nilai < 3.00 THEN
+                SELECT 'Berusaha lagi';
+        ELSEIF nilai < 2.00 THEN
+                SELECT 'Kebanyakan main';
+        ELSE
+                SELECT 'Serius kuliah g si?';
+        END IF;
+
+END
